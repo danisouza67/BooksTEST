@@ -35,22 +35,22 @@ exports.createBook = async(req, res) =>{
 //I manage to get my html form to update de data base too, but i have issues to redirect the page.
 //you may need to restart the npm once passing throught here. "/
 exports.updateBook = async(req, res, book) =>{ 
-        const newBook = new Book ({           
-            title: req.body.title,
-            author: req.body.author,
-            gender: req.body.gender,
-            desc: req.body.desc,
-            year: req.body.year,
-            price: req.body.price,             
-        });
+        // const newBook = new Book ({           
+        //     title: req.body.title,
+        //     author: req.body.author,
+        //     gender: req.body.gender,
+        //     desc: req.body.desc,
+        //     year: req.body.year,
+        //     price: req.body.price,             
+        // });
     try{
         await Book.findById(req.params.id)
         // console.log(newBook); 
-        await Book.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, newBook) => {
+        await Book.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err) => {
         if (err) {
             res.status(400).json(err);
         }
-        res.redirect('/').json(newBook);
+        res.redirect('/');
     })
     }catch(error){
         console.log("There was an error with your Book");
